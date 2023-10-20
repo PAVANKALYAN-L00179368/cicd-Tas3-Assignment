@@ -16,13 +16,13 @@ pipeline {
 
         stage('Compiling') {
             steps {
-                bat "mvn clean compile -DskipTests=true"
+                sh "mvn clean compile -DskipTests=true"
             }
         }
 
         stage('Testing') {
             steps {
-                bat "mvn test -DskipTests-true"
+                sh "mvn test -DskipTests-true"
             }
         }
 
@@ -36,7 +36,7 @@ pipeline {
         stage('Sonarqube') {
             steps {
                 withSonarQubeEnv('sonar'){
-                   bat ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Sprinboot \
+                   sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Sprinboot \
                    -Dsonar.java.binaries=. \
                    -Dsonar.projectKey=Sprinboot '''
                }
@@ -45,7 +45,7 @@ pipeline {
 
       stage('Build') {
             steps {
-                bat "mvn clean package -DskipTests=true"
+                sh "mvn clean package -DskipTests=true"
             }
         }
 
@@ -53,8 +53,8 @@ pipeline {
             steps {
                 script{
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                    bat "docker build -t springbootApp:dev -f ."
-                    bat "docker tag springbootApp:dev pavanvarikolu/springbootApp:dev "
+                    sh "docker build -t springbootApp:dev -f ."
+                    sh "docker tag springbootApp:dev pavanvarikolu/springbootApp:dev "
                     }
                 }
             }
@@ -64,7 +64,7 @@ pipeline {
             steps {
                 script{
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                    bat "docker push pavanvarikolu/springbootApp:dev "
+                    sh "docker push pavanvarikolu/springbootApp:dev "
                     }
                 }
             }
@@ -74,7 +74,7 @@ pipeline {
             steps {
                 script{
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                    bat "docker run -d -p 8080:8080 pavanvarikolu/springbootApp:dev "
+                    sh "docker run -d -p 8080:8080 pavanvarikolu/springbootApp:dev "
                     }
                 }
             }
