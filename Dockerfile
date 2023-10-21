@@ -1,6 +1,6 @@
 FROM openjdk:19-jdk-alpine3.16
 
-EXPOSE 8800
+
 
 LABEL mentainer="pavanvarikolu@gmail.com"
 
