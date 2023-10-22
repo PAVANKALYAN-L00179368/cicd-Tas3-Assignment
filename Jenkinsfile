@@ -14,13 +14,13 @@ pipeline {
             }
         }
 
-        stage('Compile') {
+        stage('Compiling') {
             steps {
                 sh "mvn clean compile -DskipTests=true"
             }
         }
 
-        stage('Test') {
+        stage('Testing') {
             steps {
                 sh "mvn test -DskipTests-true"
             }
