@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
     @GetMapping("/pavan")
     public String Hello(){
-        return " <h1>Hi, I am Pavan Kalyan and my L Id is L00179368</h1>";
+        return " <h1 align=\"center\">Welcome to Task-3 CICD-pipeline</h1>\n" +
+                "<h1 align=\"center\"> Hi I am Pavan Kalyan Varikolu, my student L id is L0017936 </h1>";
     }
 }
